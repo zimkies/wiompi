@@ -1,0 +1,37 @@
+.row
+  .columns.small-4.small-offset-4.text-center
+    %h1.text-center Enter Players
+
+    %form.add-players
+      %textarea
+
+    %button.add-player-button.button Add Players
+
+    =form_for :game, url: games_path, html: {class: 'start-game'} do
+      %input{type: 'hidden', name:'players', value: '[]'}
+      %button.start.button Start
+
+    %ul.no-bullet.players
+      %li.player Contemplative Michael
+      %li.player That one sexy Zimbabwean
+      %li.player This Nick
+
+:coffeescript
+  $ ->
+    # Add player
+    $('.add-player-button').click (e) ->
+      e.preventDefault()
+      $textArea = $('form.add-players textarea')
+      $('.players').append(
+        '<li>'  + $textArea.val() + '</li>'
+      )
+      $textArea.val('')
+
+    # Start game
+    $('form.start-game').click (e) ->
+      e.preventDefault()
+      $form = $('form.start-game')
+      players = _($(".player")).map (p) -> p.innerText
+      $form.find('input[name=players]').val(players)
+      $form.submit()
+
