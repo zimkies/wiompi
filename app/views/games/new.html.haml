@@ -8,13 +8,13 @@
     %button.add-player-button.button Add Players
 
     =form_for :game, url: games_path, html: {class: 'start-game'} do
-      %input{type: 'hidden', name:'players', value: '[]'}
+      %input{type: 'hidden', name:'game[player_names]', value: '[]'}
       %button.start.button Start
 
+    %p
+      %span.player-count 0
+      %span Players
     %ul.no-bullet.players
-      %li.player Contemplative Michael
-      %li.player That one sexy Zimbabwean
-      %li.player This Nick
 
 :coffeescript
   $ ->
@@ -23,15 +23,15 @@
       e.preventDefault()
       $textArea = $('form.add-players textarea')
       $('.players').append(
-        '<li>'  + $textArea.val() + '</li>'
+        '<li class="player">'  + $textArea.val() + '</li>'
       )
       $textArea.val('')
+      $('.player-count').html($('.player').length)
 
     # Start game
     $('form.start-game').click (e) ->
       e.preventDefault()
       $form = $('form.start-game')
       players = _($(".player")).map (p) -> p.innerText
-      $form.find('input[name=players]').val(players)
+      $form.find("input[name='game[player_names]']").val(players)
       $form.submit()
-

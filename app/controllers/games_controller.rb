@@ -25,7 +25,8 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
-    p "game_params", game_params
+    player_names = params.require(:game).permit(:player_names).fetch(:player_names).split(',')
+    player_names.map { |n| @game.players.build(name: n.strip) }
 
     respond_to do |format|
       if @game.save
@@ -70,6 +71,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.fetch(:game, {})
+      params.require(:game)
     end
 end
