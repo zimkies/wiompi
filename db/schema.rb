@@ -13,6 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20160423003538) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "hstore"
+
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -27,8 +31,8 @@ ActiveRecord::Schema.define(version: 20160423003538) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "guesses", ["player_id"], name: "index_guesses_on_player_id"
-  add_index "guesses", ["turn_id"], name: "index_guesses_on_turn_id"
+  add_index "guesses", ["player_id"], name: "index_guesses_on_player_id", using: :btree
+  add_index "guesses", ["turn_id"], name: "index_guesses_on_turn_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
@@ -37,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160423003538) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "players", ["game_id"], name: "index_players_on_game_id"
+  add_index "players", ["game_id"], name: "index_players_on_game_id", using: :btree
 
   create_table "turns", force: :cascade do |t|
     t.string   "name"
@@ -49,7 +53,7 @@ ActiveRecord::Schema.define(version: 20160423003538) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "turns", ["game_id"], name: "index_turns_on_game_id"
-  add_index "turns", ["player_id"], name: "index_turns_on_player_id"
+  add_index "turns", ["game_id"], name: "index_turns_on_game_id", using: :btree
+  add_index "turns", ["player_id"], name: "index_turns_on_player_id", using: :btree
 
 end
