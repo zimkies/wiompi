@@ -6,6 +6,7 @@ class TurnsController < ApplicationController
   def new
     @turn = @game.turns.new
     @turn.player = @game.next_player_up
+    @turn.image = @turn.all_images.sample
   end
 
   # GET /turns/1
