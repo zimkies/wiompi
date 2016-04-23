@@ -1,0 +1,21 @@
+.row
+  .columns.small-4.small-offset-4.text-center
+    %p= "Is #{@turn.player.name} telling the truth or lying?"
+
+    %p= "Submit your guesses"
+
+    = form_tag turn_guesses_path(@turn) do |f|
+      - @turn.guessing_players.each do |player|
+        %p= player.name
+        .switch
+          %input.switch-input{type: "checkbox", name:"exampleSwitch", id: "lies-#{player.id}"}
+          %label.switch-paddle{for: "lies-#{player.id}", style: 'display: 100px; '}
+            %span.show-for-sr Do you like me?
+            %span.switch-active Truth
+            %span.switch-inactive Lies!
+
+      %input.submit.button{value: 'Submit'}
+
+
+:coffeescript
+  $ ->

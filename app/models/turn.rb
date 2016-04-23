@@ -5,4 +5,8 @@ class Turn < ActiveRecord::Base
   def image_url
     'http://www.poochieheaven.com/images/products/1pamp0129SC.jpg'
   end
+
+  def guessing_players
+    game.players.where.not(id: player.id)
+  end
 end

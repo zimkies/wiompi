@@ -24,13 +24,13 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    @game = Game.new
     player_names = params.require(:game).permit(:player_names).fetch(:player_names).split(',')
     player_names.map { |n| @game.players.build(name: n.strip) }
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to new_game_turn_path(@game), notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }

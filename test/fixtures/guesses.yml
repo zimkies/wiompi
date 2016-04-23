@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lie: false
+  player_id: 
+  turn_id: 
+  win: false
+
+two:
+  lie: false
+  player_id: 
+  turn_id: 
+  win: false

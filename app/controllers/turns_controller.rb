@@ -41,7 +41,7 @@ class TurnsController < ApplicationController
       end
 
       if @turn.update(modified_turn_params)
-        format.html { redirect_to @turn, notice: 'Game was successfully updated.' }
+        format.html { redirect_to turn_guesses_path(@turn), notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @turn }
       else
         format.html { render :edit }
