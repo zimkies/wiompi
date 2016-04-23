@@ -5,7 +5,7 @@ class TurnsController < ApplicationController
   # GET /games/new
   def new
     @turn = @game.turns.new
-    @turn.player = @game.players.first
+    @turn.player = @game.next_player_up
   end
 
   # GET /turns/1

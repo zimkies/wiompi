@@ -1,19 +1,33 @@
 .row
-  .columns.small-4.small-offset-4.text-center
-    %p= "#{@turn.player.name}, you are the Teller. Describe your image"
+  .columns.medium-4.medium-offset-4.text-center
+    -if @turn.guessed?
+      %p= "#{@turn.player.name}'s image:"
 
-    %img{src: @turn.image_url}
+      %img{src: @turn.image_url}
+
+      %h3
+        -if @turn.lie
+          It was a lie
+        -else
+          It was the truth!
+
+      %a.button{href: new_game_turn_path(@turn.game)} Next
+
+    -else
+      %p= "#{@turn.player.name}, you are the Teller. Describe your image"
+
+      %img{src: @turn.image_url}
 
 
-    =form_for @turn do |form|
-      %input.hide{type: 'checkbox', name: 'turn[lie]'}
-      =form.hidden_field(:image)
+      =form_for @turn do |form|
+        %input.hide{type: 'checkbox', name: 'turn[lie]'}
+        =form.hidden_field(:image)
 
-      %input.button.truth-button{type: 'submit', value: "I tell truth"}
-      %input.button.lie-button{type: 'submit', value: "I lie"}
+        %input.button.truth-button{type: 'submit', value: "I tell truth"}
+        %input.button.lie-button{type: 'submit', value: "I lie"}
 
-      %br
-      %input.button{type: 'submit', value: "Enter Guesses"}
+        %br
+        %input.button{type: 'submit', value: "Enter Guesses"}
 
 :coffeescript
   $ ->
