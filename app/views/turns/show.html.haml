@@ -1,0 +1,27 @@
+.row
+  .columns.small-4.small-offset-4.text-center
+    %p= "#{@turn.player.name}, you are the Teller. Describe your image"
+
+    %img{src: @turn.image_url}
+
+
+    =form_for @turn do |form|
+      %input.hide{type: 'checkbox', name: 'turn[lie]'}
+      =form.hidden_field(:image)
+
+      %input.button.truth-button{type: 'submit', value: "I tell truth"}
+      %input.button.lie-button{type: 'submit', value: "I lie"}
+
+      %br
+      %input.button{type: 'submit', value: "Enter Guesses"}
+
+:coffeescript
+  $ ->
+    # Add player
+    $('.lie-button').click (e) ->
+      e.preventDefault()
+      $("input[name='turn[lie]']").prop('checked', true)
+
+    $('.truth-button').click (e) ->
+      e.preventDefault()
+      $("input[name='turn[lie]']").prop('checked', false)

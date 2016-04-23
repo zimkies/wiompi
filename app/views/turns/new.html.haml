@@ -1,0 +1,12 @@
+.row
+  .columns.small-4.small-offset-4.text-center
+    %h1.text-center= "Hey #{@turn.player.name}"
+
+    %p It's your turn
+
+    =form_for @turn do
+      =hidden_field(:turn, :image)
+      =hidden_field(:turn, :game_id)
+      =hidden_field(:turn, :player_id)
+
+      %input.button.submit{type: 'submit', value: "Ready"}
