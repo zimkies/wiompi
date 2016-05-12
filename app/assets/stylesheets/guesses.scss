@@ -3,15 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .switch-paddle {
-  width: 100px;
+  width: 150px;
 }
 
 input:checked {
   ~ {
-    left: 5em;
+    // left: 5em;
     .switch-paddle {
       &:after {
-        left: 5em;
+        left: 8.5em;
       }
     }
   }

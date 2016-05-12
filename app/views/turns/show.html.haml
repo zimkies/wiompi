@@ -1,5 +1,7 @@
 .row
   .columns.medium-4.medium-offset-4.text-center
+    %br
+    %br
     -if @turn.guessed?
       %p= "#{@turn.player.name}'s image:"
 
@@ -16,18 +18,21 @@
     -else
       %p= "#{@turn.player.name}, you are the Teller. Describe your image"
 
-      %img{src: @turn.image_url}
+      %img.img-url{src: @turn.image_url}
 
 
       =form_for @turn do |form|
         %input.hide{type: 'checkbox', name: 'turn[lie]'}
         =form.hidden_field(:image)
 
-        %input.button.truth-button{type: 'submit', value: "I tell truth"}
-        %input.button.lie-button{type: 'submit', value: "I lie"}
+        %input.switch-input{type: "checkbox", name:"turn[lie]", id: "lie_input"}
+        %label.switch-paddle{for: "lie_input"}
+          %span.show-for-sr Do you like me?
+          %span.switch-active I'll lie
+          %span.switch-inactive I won't lie
 
         %br
-        %input.button{type: 'submit', value: "Enter Guesses"}
+        %input.turn-submit-button.button{type: 'submit', value: "Enter Guesses"}
 
 :coffeescript
   $ ->

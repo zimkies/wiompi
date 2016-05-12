@@ -7,7 +7,8 @@ class GuessesController < ApplicationController
 
   def create
     @turn.guessing_players.each do |player|
-      if params[:player][player.id.to_s]
+
+      if params[:player] && params[:player][player.id.to_s]
         Guess.create!(turn: @turn, player_id: player.id, lie: true)
       else
         Guess.create!(turn: @turn, player_id: player.id, lie: false)
